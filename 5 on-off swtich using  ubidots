@@ -1,0 +1,22 @@
+#include "UbidotsMicroESP8266.h"
+#define TOKEN  "A1E-k911xwbm79LQtahpk0cCSAI1BrDwlE"  // Put here your Ubidots TOKEN
+#define ID "5a74b9b1c03f971a404fbeb4"  // Variable ID of Ubidots
+#define WIFISSID "r"
+#define PASSWORD "123456789"
+
+Ubidots client(TOKEN);
+
+
+void setup() {
+    Serial.begin(115200);
+    delay(10);
+    client.wifiConnection(WIFISSID, PASSWORD);
+     pinMode(LED_BUILTIN, OUTPUT);
+}
+
+void loop() {
+    int value = client.getValue(ID);
+    Serial.println(value);
+    digitalWrite(LED_BUILTIN,value);
+
+}    
