@@ -1,0 +1,46 @@
+/*
+ LED control with  Blynk APP by sohel
+
+ note:- i am working with pin D7 so connect LED with D7 and follow this steps  
+ */
+
+
+1. Downloading and Installing the Blynk App on the Smartphone.
+
+2. create a new account on Blynk and login using that.
+
+3. After logging in, create a new project by clicking ‘New Project’
+
+4. Give the project a name of your liking. Select the hardware device as 
+  NodeMCU and select the connection type as WIFI, and hit create.
+
+5. At this point Blynk will send an Auth token to your email id. 
+
+6. Add buttons on the blank project. To add a new button just click anywhere on the
+   blank area and select button from the side menu that pops up. 
+   You can place the button anywhere on the screen.
+
+7. Click on the Button and give it a name. Below the name,
+     in the textbox select the pin as digital pin D7.
+
+8. Download the latest Blynk Libraries 
+     https://github.com/ubidots/ubidots-esp8266
+
+9. Copy the files/folders from the Libraries folder of the downloaded Blynk directory, 
+  and paste it to the Libraries folder of your Arduino IDE’s directory 
+  Similarly, copy the files/folder from the Tools folder of the downloaded Blynk directory, 
+  and paste it to the Tools folder of your Arduino IDE’s directory.
+
+10. Go to Files > Examples > Blynk > Boards_WIFI > ESP8266_Standalone. 
+      A new file with some prewritten code will open.
+
+11. Now, in this file we only need to change 3 lines of code ssid, pass and auth code
+
+12 test  on/off button with app
+
+
+
+
+
+
+
