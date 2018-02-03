@@ -1,0 +1,35 @@
+1. Go to the Device section to create a new device called “control"(OR any name you want), 
+
+2. Once the device is created, enter to it and create a new default variable called “led"(any name).
+ 
+ 3.Go to the Dashboard section to create a new “switch” control widget to control the status of the led. 
+ Choose the device you created, the variable, press “Finish”.
+ 
+4. Once the widget is created, you will see the on-off widget 
+ 
+ 
+ now 
+ 
+ 
+ #include "UbidotsMicroESP8266.h"
+#define TOKEN  ""  // Put here your Ubidots TOKEN
+#define ID ""  // Variable ID of Ubidots  (in my case i am putting variable id for "led" )
+#define WIFISSID "" //type wifi name
+#define PASSWORD "" // type wifi pass
+
+Ubidots client(TOKEN);
+
+
+void setup() {
+    Serial.begin(115200);
+    delay(10);
+    client.wifiConnection(WIFISSID, PASSWORD);
+     pinMode(D7, OUTPUT);    
+}
+
+void loop() {
+    int value = client.getValue(ID);
+    Serial.println(value);
+    digitalWrite(D7,value);
+
+}    
