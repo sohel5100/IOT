@@ -1,0 +1,80 @@
+/*
+ Connecting Google Assistant (using IFTTT) to make the NodeMCU work with voice commands BY SOHEL
+ Note: Follow this steps once you have working LED connection with blynk app
+       i am using pin d7 for led control
+
+
+
+We cannot connect the Google Assistant to the NodeMCU directly, and that is the only reason we are using the Blynk app. 
+Blynk app can directly connect to the NodeMCU and send data to it. So, if we can send the voice commands interpreted 
+by google assistant directly to the Blynk app, the Blynk app can then forward those commands to the NodeMCU.
+But the problem is Google Assistant cannot directly understand foreign commands like “turn on the fan” or “turn on relay one” etc. 
+on its own. So, to solve this we use another intermediate app/website called ‘IFTTT’.
+
+
+Simply, to control our home appliances over the internet we are using NodeMCU and to connect NodeMCU with the home appliances 
+we use a relay board. Now to send on or off signals to the NodeMCU we use our smartphone, and we do this using the Blynk app.
+But we want to send the on or off signals using voice commands. 
+To do this we use google assistant in our smartphone and an app called IFTTT.
+
+So, in the end what will happen is, when we say a voice command like “ok google turn on the light” to the Google Assistant,
+Google Assistant sends that this foreign command to IFTTT. IFTTT interprets this command and sends an On or Off signal to 
+the Blynk app via the Blynk Server. Blynk will then send this signal to the NodeMCU and then to our electrical appliances.
+
+*/
+
+1. Go to IFTTT’s website and sign up to it using your Google Account.
+
+2. After Signing in click on My Applets from the header and select New Applet.
+
+3. Click on ‘this’
+
+4. Search for Google Assistant and select it. And then Click on Connect.
+
+5. At this point IFTTT will ask you permission to use your google account to add voice commands to it.
+   Which you simply allow by clicking on ‘Allow’.
+
+6. Select the card that says “Say a simple phrase”.
+
+7. Next, for the first textbox type the phrase that you want to say to Google Assistant. 
+   It can be anything such as “Turn on the LED”, “Turn on the fan” or anything you like.
+   
+8. For the next two text boxes, you write some other ways to say the first command. For example,
+   if in the first textbox you wrote “Turn on the LED”, then in the second and third textboxes
+   you can write something like “Turn the LED On” or “Please Turn on the LED” 
+   
+9. In the fourth textbox type the reply that Google Assistant should respond with. For example, “Okay, Turning on the LED”.
+
+10. Finally, click on ‘Create Trigger’.
+
+11. ow, click on that IFTTT if this than that THAT button [Home Automation using NodeMCU and google assistant] and type webhooks select it, and click connect. 
+    Webhooks will allow us to send commands to the Blynk Server.
+    
+12. Now, in the URL field type this URL:
+
+         http://188.166.206.43/ YourAuthTokenHere / update / DigitalPinToBeUpdateHere
+         
+  This is the URL of Blynk Server of India, but it should work for other places as well. 
+  Replace the “YourAuthTokenHere” part with your Blynk Auth token that you received in the mail.
+  And “DigitalPinToBeUpdateHere” part with the Digital pin of NodeMCU that is to be updated. 
+  So, as we assigned the Digital Pin D3 of NodeMCU to relay one we must write D3 in place of “DigitalPinToBeUpdateHere”
+  But wait we cannot write D3 there, because when Blynk Server receives this command from IFTTT it assumes as if the 
+  command it received was to be sent to an ‘Arduino Uno’ board,
+   but in our case, we are sending it to NodeMCU.         
+
+13. Next, Select the ‘Method’ field as PUT
+
+14. Select ‘Content type’ as Application/JSON.
+
+15. For the ‘Body’ type this:   [“1”]
+
+16. Now click on ‘Create Action’ and then Finish.
+
+17. Similarly, we create another applet to turn off the relay. Repeat all the steps above from step 4 except the following changes:
+
+    In step 8 and 9, instead of writing “Turn on the LED”, type “Turn off the LED”
+    In step 15, instead of [“1”], type [“0”].
+    
+ 18. ALL DONE NOW TO GOOGLE ASSISTANCE and say "Turn on the LED"
+ 
+
