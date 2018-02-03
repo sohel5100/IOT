@@ -1,14 +1,22 @@
-void setup()
-{
+/*
+ NODEMCU(ESP8266MOD) Blink by SOHEL KHAN
+ Blink the blue LED on the NODEMCU
+ 
+ The BUILT IN LED on the NODEMCU module is connected to GPIO1 
+ 
+ Note that this sketch uses LED_BUILTIN to find the pin with the internal LED
+*/
 
-  pinMode(D7,OUTPUT); 
-
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
 }
 
-
-void loop(){
-digitalWrite(D7,HIGH);
-delay(1000);
-digitalWrite(D7,LOW);
-delay(1000);
+// the loop function runs over and over again forever
+void loop() {
+  digitalWrite(LED_BUILTIN, LOW);   // Turn the LED on (Note that LOW is the voltage level
+                                    // but actually the LED is on  this is because 
+                                    // it is active low on the NODEMCU)
+  delay(1000);                      // Wait for a second
+  digitalWrite(LED_BUILTIN, HIGH);  // Turn the LED off by making the voltage HIGH
+  delay(2000);                      // Wait for two seconds (to demonstrate the active low LED)
 }
