@@ -1,0 +1,24 @@
+#include "UbidotsMicroESP8266.h"
+
+#define TOKEN  ""  // Put here your Ubidots TOKEN
+#define ID_1 "" // Put your variable ID here
+
+#define WIFISSID "" // Put here your Wi-Fi SSID
+#define PASSWORD "" // Put here your Wi-Fi password
+
+Ubidots client(TOKEN);
+
+void setup(){
+    Serial.begin(115200);
+    client.wifiConnection(WIFISSID, PASSWORD);
+    //client.setDebug(true); // Uncomment this line for  DEBUG 
+}
+
+void loop(){
+    float value1 = 35;   // you can put any value or any input pinread here
+    //float value2 = analogRead(1)  // if you want to connect any analog sensor connect on Analog pin 1
+    client.add(ID_1, value1);
+ 
+    client.sendAll(true);
+    delay(5000);
+}
